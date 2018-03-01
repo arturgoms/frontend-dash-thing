@@ -1,0 +1,33 @@
+extends ../layout_clean
+
+block content
+	.container(style="width:85%; max-width: 450px")
+		h1(class="title is-1") Edit your profile
+		br
+		if messages.erro
+			.notification.is-danger
+				strong #{messages.erro}
+			br
+		form(method="POST", action="/equip/edit/#{model._id}", role="form")
+			.field
+				label.label Número de Série
+				.control
+					if model
+						input.input(type='text',name="nserie", placeholder='John Smith', value="#{model.nserie}", required)
+					else
+						input.input(type='text',name="nserie", placeholder='John Smith', value="", autofocus, required)
+
+			.field
+				label.label CNPJ
+				.control.has-icons-left.has-icons-right
+
+					input.input(type='text', name="cnpj", placeholder='hello@host',value="#{model.cnpj}", required)
+					span.icon.is-small.is-left
+						i.fas.fa-envelope
+					span.icon.is-small.is-right
+						i.fas.fa-exclamation-triangle
+
+			.field.is-grouped
+				.control
+					button.button.is-primary(type="submit") Salvar
+

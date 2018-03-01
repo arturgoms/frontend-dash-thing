@@ -1,0 +1,39 @@
+doctype html
+html
+	head
+		title= title
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(rel='stylesheet', href='/css/style.css')
+		link(rel='stylesheet', href='/css/bulma.css')
+		script(src='/js/Charts.js')
+	body
+		include partials/navbar
+		block content 
+
+		
+		script.
+			document.addEventListener('DOMContentLoaded',	function	()	{
+					var	$navbarBurgers	=	Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'),	0);
+					if	($navbarBurgers.length	>	0)	{
+							$navbarBurgers.forEach(function	($el)	{
+									$el.addEventListener('click',	function	()	{
+											var	target	=	$el.dataset.target;
+											var	$target	=	document.getElementById(target);
+											$el.classList.toggle('is-active');
+											$target.classList.toggle('is-active');
+
+									});
+							});
+					}
+
+			});
+
+				
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+		script(src='https://code.jquery.com/jquery-3.1.1.min.js', integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=', crossorigin='anonymous')
+		script(src='/css/semantic/semantic.min.js')
+		script(defer='', src='https://use.fontawesome.com/releases/v5.0.6/js/all.js')
+	
+
+
+

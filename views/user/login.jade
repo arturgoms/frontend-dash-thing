@@ -1,0 +1,50 @@
+extends ../layout_clean
+
+block content
+	br
+	br
+	.container(style="width:85%; max-width: 450px; padding-top: 5%")
+		h1(class="title is-1") Login
+		br
+		if messages.erro
+			.notification.is-danger
+				each msg in messages.erro
+					strong #{msg}
+					br
+			br
+		form(method="POST", action="/", role="form")
+			.field
+				label.label Email
+				.control.has-icons-left.has-icons-right
+					if dados
+						input.input(type='email', name="email", placeholder='john@host',value="#{dados.email}", required)
+						span.icon.is-small.is-left
+							i.fas.fa-envelope
+						span.icon.is-small.is-right
+							i.fas.fa-exclamation-triangle
+					else
+						input.input(type='email', name="email", placeholder='john@host',value="",required)
+						span.icon.is-small.is-left
+							i.fas.fa-envelope
+						span.icon.is-small.is-right
+							i.fas.fa-exclamation-triangle
+			.field
+				label.label Password
+				p.control.has-icons-left
+					if dados
+						input.input(type='password', name="password", placeholder='Password', autofocus, required)
+						span.icon.is-small.is-left
+							i.fas.fa-lock
+					else
+						input.input(type='password', name="password", placeholder='Password', required)
+						span.icon.is-small.is-left
+							i.fas.fa-lock
+			.field.is-grouped
+				.control
+					button.button.is-primary(type="submit") Login
+					span &nbsp;
+					a.button.is-info()
+						span.icon
+							i.fab.fa-facebook
+						span Facebook
+

@@ -1,0 +1,42 @@
+extends ../layout_clean
+
+block content
+	.container(style="width:85%; max-width: 450px")
+		h1(class="title is-1") Register
+		p(class="subtitle is-5") Register your account
+		br
+		if messages.erro
+			.notification.is-danger
+				each msg in messages.erro
+					strong #{msg}
+					br
+			br
+		form(method="POST", action="/equip/register", role="form")
+			.field
+				label.label Número de Série
+				.control
+					if dados
+						input.input(type='text',name="nserie", placeholder='John Smith', value="#{model.nserie}", required)
+					else
+						input.input(type='text',name="nserie", placeholder='John Smith', value="", autofocus, required)
+
+			.field
+				label.label CNPJ
+				.control.has-icons-left.has-icons-right
+					if dados
+						input.input(type='text', name="cnpj", placeholder='john@host',value="#{model.cnpj}", required)
+						span.icon.is-small.is-left
+							i.fas.fa-envelope
+						span.icon.is-small.is-right
+							i.fas.fa-exclamation-triangle
+					else
+						input.input(type='text', name="cnpj", placeholder='john@host',value="",required)
+						span.icon.is-small.is-left
+							i.fas.fa-envelope
+						span.icon.is-small.is-right
+							i.fas.fa-exclamation-triangle
+
+			.field.is-grouped
+				.control
+					button.button.is-primary(type="submit") Criar
+

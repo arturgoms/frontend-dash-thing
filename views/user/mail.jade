@@ -1,0 +1,37 @@
+extends ../layout_clean
+
+block content
+  if messages.erro
+    .notification.is-danger
+      each msg in messages.erro
+        strong #{msg}
+        br
+  if messages.info
+    .notification.is-success
+      strong #{messages.info}
+    br
+  .container(style="width:85%; max-width: 450px")
+    form(method="POST", action='/mail', role='form')
+      .field
+        label.label Name
+        .control
+          input.input(type='text', name='name',placeholder='Name', required)
+      .field
+        label.label Assunto
+        .control
+          input.input(type='text', name='assunto', placeholder='Assunto', required)
+      .field
+        label.label Email
+        .control.has-icons-left.has-icons-right
+          input.input(type='email', name='email', placeholder='Email', required)
+          span.icon.is-small.is-left
+            i.fas.fa-envelope
+      .field
+        label.label Message
+        .control
+          textarea.textarea(placeholder='Mensagem', name='assunto', required)
+      .field.is-grouped
+        .control
+          button.button.is-link(type='submit') Submit
+
+

@@ -1,0 +1,50 @@
+nav.navbar.is-transparent
+			.navbar-brand
+				a.navbar-item(href='/dashboard')
+				.navbar-burger.burger(data-target='navbarExampleTransparentExample')
+					span 
+					span
+					span
+			#navbarExampleTransparentExample.navbar-menu
+				if isLogged					
+					.navbar-start
+						a.navbar-item(href='/dashboard')
+							| Home
+						.navbar-item.has-dropdown.is-hoverable
+							a.navbar-link(href='/equip')
+								| Produtos
+							.navbar-dropdown.is-boxed
+								a.navbar-item(href='/equip/register')
+									| Registrar
+								a.navbar-item(href='/equip/')
+									| Listar
+								hr.navbar-divider
+								a.navbar-item(href='/equip/')
+									| Editar
+								a.navbar-item.is-active(href='/equip/')
+									| Mostrar
+						a.navbar-item(href='/mail')
+							| Entrar em contato
+				.navbar-end
+					.navbar-item
+						.field.is-grouped
+							if !isLogged
+								p.control
+									a.bd-tw-button.button(href="/")
+										span.icon
+											i.fas.fa-bookmark
+										span
+											| Login
+								p.control
+									a.button.is-primary(href='/register')
+										span.icon
+											i.far.fa-newspaper
+										span Register
+							else
+								p.control
+									p 
+									a.button.is-danger(href='/logout')
+										span.icon
+											i.fas.fa-exclamation
+										span Logout
+br

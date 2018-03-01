@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+	h1(class="title is-1") Medicoes
+	br
+	a(href="/med/register/#{id}")
+		button.button.is-success Add
+	if messages.erro
+		.notification.is-danger
+			strong #{messages.erro}
+	if messages.info
+		.notification.is-success
+			strong #{messages.info}
+	if lista
+		table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth
+			thead
+				tr
+					th
+						abbr(title='Nome') Grão
+					th
+						abbr(title='Email') Umidade
+					th
+						abbr(title='Email') Valores
+					th
+						abbr(title='Email') Curva
+					th
+						abbr(title='Email') Ações
+			tbody
+				each valor in lista
+					tr
+						th #{valor.nomeGrao}
+						th #{valor.umidade}
+						th #{valor.valAssin}
+						th #{valor.idCurva}
+						th 
+							form(method="POST", action="/med/delete/#{valor.id}/#{id}", role="form", style="display: inline-block", id="excluir-btn")
+								button.button.is-danger(type="submit") Delete
+
+	else
+		p Nenhum Dado encontrado				

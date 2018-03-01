@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+	br
+	br
+	h1(class="title is-1") Profile
+	br
+	if messages.erro
+		.notification.is-danger
+			strong #{messages.erro}
+	if messages.info
+		.notification.is-success
+			strong #{messages.info}
+				
+
+	h1(class="title is-3") #{model.nserie}
+	p
+		b CNPJ: #{model.cnpj}
+	p
+		b Data: #{moment(model.date).format('DD/MM/YYYY - HH:MM:ss')}

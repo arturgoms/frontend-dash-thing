@@ -1,0 +1,27 @@
+body {
+  padding: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+}
+a {
+  color: #00B7FF;
+}
+.a.navbar-item:hover{
+	color: #21824e;
+}
+.footer {
+  position: flex;
+  width: 99%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
+#footer-hero{ 
+  position:flex; 
+  bottom:0%; 
+  width:100%;  
+}
+

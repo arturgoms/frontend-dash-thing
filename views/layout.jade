@@ -1,0 +1,88 @@
+doctype html
+html
+	head
+		title= title
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(rel='stylesheet', href='/css/style.css')
+		link(rel='stylesheet', href='/css/bulma.css')
+		script(src='/js/Charts.js')
+		script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
+	body
+		include partials/navbar
+		.columns(style="margin-left: 1%;  width: 98%; position: flex")
+			.column.is-2.is-sidebar-menu.is-hidden-mobile
+				aside.menu
+					p.menu-label
+						| General
+					ul.menu-list
+						li
+							a(href="/dashboard").is-active Dashboard
+						li
+							a(href="/user") Clientes
+					p.menu-label
+						| Administração
+					ul.menu-list
+						li
+							a Produtos
+						li
+							a Promoções
+							ul
+								li
+									a Adicionar Promoção
+								li
+									a Promoções em Andamento
+								li
+									a Aceitação
+						li
+							a Visibilidade
+						li
+							a Filiais
+					p.menu-label
+						| Transações
+					ul.menu-list
+						li
+							a Pagamentos
+						li
+							a Balanço
+			.column.is-main-content(style="width:100%")
+					
+						block content 
+		
+
+
+		.navbar.navbar-fixed-bottom(style="padding-top: 7%")
+
+			include partials/footer
+
+		
+		script.
+		
+			document.addEventListener('DOMContentLoaded',	function	()	{
+					var	$navbarBurgers	=	Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'),	0);
+					if	($navbarBurgers.length	>	0)	{
+							$navbarBurgers.forEach(function	($el)	{
+									$el.addEventListener('click',	function	()	{
+											var	target	=	$el.dataset.target;
+											var	$target	=	document.getElementById(target);
+											$el.classList.toggle('is-active');
+											$target.classList.toggle('is-active');
+
+									});
+							});
+					}
+
+			});
+
+				
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+		script(src='https://code.jquery.com/jquery-3.1.1.min.js', integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=', crossorigin='anonymous')
+		script(src='/css/semantic/semantic.min.js')
+		script(defer='', src='https://use.fontawesome.com/releases/v5.0.6/js/all.js')
+
+
+
+		block scripts
+	
+
+
+

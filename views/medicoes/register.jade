@@ -1,0 +1,46 @@
+extends ../layout_clean
+
+block content
+	.container(style="width:85%; max-width: 450px")
+		h1(class="title is-1") Register
+		p(class="subtitle is-5") Register your account
+		br
+		if messages.erro
+			.notification.is-danger
+				each msg in messages.erro
+					strong #{msg}
+					br
+			br
+		form(method="POST", action="/med/register/#{id}", role="form")
+			.field
+				label.label Grão
+				.control
+					if dados
+						input.input(type='text',name="medicoes[nomeGrao]", placeholder='John Smith',  )
+					else
+						input.input(type='text',name="medicoes[nomeGrao]", placeholder='John Smith', value="", autofocus)
+			.field
+				label.label Umidade
+				.control
+					if dados
+						input.input(type='text',name="medicoes[umidade]", placeholder='John Smith',  required)
+					else
+						input.input(type='text',name="medicoes[umidade]", placeholder='John Smith', value="", autofocus )
+			.field
+				label.label Valores
+				.control
+					if dados
+						input.input(type='text',name="medicoes[valAssin]", placeholder='John Smith', required)
+					else
+						input.input(type='text',name="medicoes[valAssin]", placeholder='John Smith', value="", autofocus)		
+			.field
+				label.label Curva
+				.control
+					if dados
+						input.input(type='text',name="medicoes[idCurva]", placeholder='John Smith',  required)
+					else
+						input.input(type='text',name="medicoes[idCurva]", placeholder='John Smith', value="", autofocus)
+			.field.is-grouped
+				.control
+					button.button.is-primary(type="submit") Criar
+
