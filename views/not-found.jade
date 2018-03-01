@@ -1,4 +1,6 @@
-extends layout
+extends layout_clean
 
 block content
-  h1 Página não encontrada!
+	.container(style="width:85%; padding-top: 5%; padding-left: 0%; text-align: center")
+		h1(class="title is-1") Página não encontrada! 
+			p #{rota}

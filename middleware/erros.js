@@ -1,6 +1,8 @@
 exports.notfound = function(req,res,next){
 	res.status(404);
-	res.render('not-found');
+	res.render('not-found', {
+		rota: req.path
+	});
 };
 
 exports.serverError = function(err, req, res, next) {  
