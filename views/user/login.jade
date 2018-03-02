@@ -12,7 +12,13 @@ block content
 					strong #{msg}
 					br
 			br
-		form(method="POST", action="/", role="form")
+		if messages.info
+			.notification.is-success
+				each msg in messages.info
+					strong #{msg}
+					br
+			br
+		form(method="POST", action="/login", role="form")
 			.field
 				label.label Email
 				.control.has-icons-left.has-icons-right
