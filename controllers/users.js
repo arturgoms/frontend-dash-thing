@@ -9,7 +9,7 @@ module.exports = function(app) {
 					req.flash('erro', 'Error ao buscar usuários: '+err);
 					res.redirect('/user');
 				} else {
-					res.render('user/index', {lista:data});
+					res.render('user/index', {lista:data, logged_id: req.session.user._id});
 				}
 			});
 		},
@@ -27,7 +27,7 @@ module.exports = function(app) {
 				user.findOne({'email': model.email},function(err,dados){
 					if(dados){
 						req.flash('erro', 'Esse email já existe');
-						res.render('user/register', {user:model});
+						res.render('user/register', {dados:model});
 					} else {
 						model.save(function(err){
 							if(err){
@@ -37,7 +37,7 @@ module.exports = function(app) {
 								});
 							} else {
 								req.flash('info', 'Registro cadastrado com sucesso!');
-								res.redirect('/user');
+								res.redirect('/login');
 							}
 						});
 					}

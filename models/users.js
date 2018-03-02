@@ -20,6 +20,9 @@ module.exports = function(){
 		},
 		date: {
 			type: Date, dafault: Date.now
+		},
+		permission: {
+			type: String, default: "user"
 		}
 	});
 
