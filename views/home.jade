@@ -6,19 +6,40 @@ html
 		link(rel='stylesheet', href='/css/style.css')
 		link(rel='stylesheet', href='/css/bulma.css')
 		script(src='/js/Charts.js')
-		script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
-	body
-		include partials/navbar
-					
-		block content 
+	body.hero.is-dark
+			.hero-head
+				nav.navbar
+					.container
+						.navbar-brand
 
-		.navbar.navbar-fixed-bottom(style="padding-top: 7%")
+			.hero-body(style="height: 94.6vh; position: relative;")
+				.container.has-text-centered
+					p.title
+						| Dashboard
+					p.subtitle
+						| Welcome to your dashboard, please login 
+						br
+						br
+						img(src='/img/dash.png', width='70%', height='70%')
+						p.controll(style="display:inline-block")
+							a.bd-tw-button.button(href="/login")
+								span.icon
+									i.fas.fa-bookmark
+								span
+									| Login
+						span &nbsp;
+						p.control(style="display:inline-block")
+							a.button.is-primary(href='/register')
+								span.icon
+									i.far.fa-newspaper
+								span Register
 
-			include partials/footer
+
+
+ 
 
 		
 		script.
-
 			document.addEventListener('DOMContentLoaded',	function	()	{
 					var	$navbarBurgers	=	Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'),	0);
 					if	($navbarBurgers.length	>	0)	{
@@ -34,14 +55,11 @@ html
 					}
 
 			});
+
 				
 		script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
 		script(src='https://code.jquery.com/jquery-3.1.1.min.js', integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=', crossorigin='anonymous')
 		script(src='/css/semantic/semantic.min.js')
 		script(defer='', src='https://use.fontawesome.com/releases/v5.0.6/js/all.js')
-
-		block scripts
 	
-
-
-
+	

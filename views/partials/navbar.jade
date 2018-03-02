@@ -25,12 +25,16 @@ nav.navbar.is-transparent
 									| Mostrar
 						a.navbar-item(href='/mail')
 							| Entrar em contato
+				else
+					.navbar-start
+						a.navbar-item(href='/')
+							| Home
 				.navbar-end
 					.navbar-item
 						.field.is-grouped
 							if !isLogged
 								p.control
-									a.bd-tw-button.button(href="/")
+									a.bd-tw-button.button(href="/login")
 										span.icon
 											i.fas.fa-bookmark
 										span

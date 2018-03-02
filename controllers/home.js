@@ -5,7 +5,10 @@ module.exports = function(app) {
 	var user = app.models.users;
 	var HomeController = {
 		index: function(req,res){
-			res.render('index', { 
+			res.render('home');
+		},
+		dashboard: function(req,res){
+			res.render('dashboard/index', { 
 			  	title: 'Dashboard',
 			  	data: [3,4,6,5,2,12]
 			  });
@@ -23,20 +26,20 @@ module.exports = function(app) {
 				user.findOne({'email': email}, function(err, data){
 					if(err){
 						req.flash('erro', 'Erro ao entrar no sistema: '+err);
-						res.redirect('/');
+						res.redirect('/login');
 					} else if(!data){
 						req.flash('erro', 'Email não encontrado');
-						res.redirect('/');
+						res.redirect('/login');
 					} else if(!usuario.compareHash(password, data.password)){
 						req.flash('erro', 'Senha errada');
-						res.redirect('/');
+						res.redirect('/login');
 					} else {
 						req.session.user = data;
 						res.redirect('/dashboard');
 					}
 				});
 			} else {
-				res.redirect('/');
+				res.redirect('/login');
 			}
 
 		},

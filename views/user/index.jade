@@ -1,47 +1,87 @@
 extends ../layout
 
 block content
-	h1(class="title is-1") Usuários
-	br
-	if messages.erro
-		.notification.is-danger
-			strong #{messages.erro}
-	if messages.info
-		.notification.is-success
-			strong #{messages.info}
-	if lista
-		table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth
-			thead
-				tr
-					th
-						abbr(title='ID') ID
-					th
-						abbr(title='Nome') Nome
-					th
-						abbr(title='Email') Email
-					th
-						abbr(title='Email') Data
-					th
-						abbr(title='Email') Ações
-			tbody
-				each valor in lista
-					tr
-						th #{valor._id}
-						th #{valor.name}
-						th #{valor.email}
-						th #{moment(valor.date).format('DD/MM/YYYY - HH:MM:ss')}
-						th 
-							a.button.is-info(href='/profile/#{valor._id}')
-								span.icon
-									i.far.fa-newspaper
-							span &nbsp;
-							a.button.is-primary(href='/edit/#{valor._id}')
-								span.icon
-									i.far.fa-bookmark
-							span &nbsp;
-							form(method="POST", action="/delete/#{valor._id}", role="form", style="display: inline-block", id="excluir-btn")
-								button.button.is-danger(type="submit") Delete
+	.columns(style="margin-left: 1%;  width: 98%; position: flex")
+		.column.is-2.is-sidebar-menu.is-hidden-mobile
+			aside.menu
+				p.menu-label
+					| General
+				ul.menu-list
+					li
+						a(href="/dashboard") Dashboard
+					li
+						a(href="/user").is-active Clientes
+				p.menu-label
+					| Administração
+				ul.menu-list
+					li
+						a Produtos
+					li
+						a Promoções
+						ul
+							li
+								a Adicionar Promoção
+							li
+								a Promoções em Andamento
+							li
+								a Aceitação
+					li
+						a Visibilidade
+					li
+						a Filiais
+				p.menu-label
+					| Transações
+				ul.menu-list
+					li
+						a Pagamentos
+					li
+						a Balanço
+		.column.is-main-content(style="width:100%")
+			h1(class="title is-1") Usuários
+			br
+			if messages.erro
+				.notification.is-danger
+					strong #{messages.erro}
+			if messages.info
+				.notification.is-success
+					strong #{messages.info}
+			if lista
+				table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth
+					thead
+						tr
+							th
+								abbr(title='ID') ID
+							th
+								abbr(title='Nome') Nome
+							th
+								abbr(title='Email') Email
+							th
+								abbr(title='Email') Data
+							th
+								abbr(title='Email') Ações
+					tbody
+						each valor in lista
+							tr
+								th #{valor._id}
+								th #{valor.name}
+								th #{valor.email}
+								th #{moment(valor.date).format('DD/MM/YYYY - HH:MM:ss')}
+								th 
+									a.button.is-info(href='/profile/#{valor._id}')
+										span.icon
+											i.far.fa-newspaper
+									span &nbsp;
+									a.button.is-primary(href='/edit/#{valor._id}')
+										span.icon
+											i.far.fa-bookmark
+									span &nbsp;
+									if valor._id == logged_id
+										form(method="POST", action="/delete/#{valor._id}", role="form", style="display: inline-block", id="excluir-btn")
+											button.button.is-danger(type="submit", disabled) Delete
+									else
+										form(method="POST", action="/delete/#{valor._id}", role="form", style="display: inline-block", id="excluir-btn")
+											button.button.is-danger(type="submit") Delete
 
 
-	else
-		p Nenhum Dado encontrado				
+			else
+				p Nenhum Dado encontrado				

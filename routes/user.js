@@ -1,6 +1,6 @@
 module.exports = function(app){
 	var user = app.controllers.users;
-	var auth = require('../middleware/auth');
+	var auth = require('../middleware/admin');
 	app.route('/user').get(auth,user.index);
 	app.route('/register')
 		.get(user.register)

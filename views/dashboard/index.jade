@@ -1,54 +1,89 @@
-extends layout
+extends ../layout
 
 block content
+	.columns(style="margin-left: 1%;  width: 98%; position: flex")
+		.column.is-2.is-sidebar-menu.is-hidden-mobile
+			aside.menu
+				p.menu-label
+					| General
+				ul.menu-list
+					li
+						a(href="/dashboard").is-active Dashboard
+					li
+						a(href="/user") Clientes
+				p.menu-label
+					| Administração
+				ul.menu-list
+					li
+						a Produtos
+					li
+						a Promoções
+						ul
+							li
+								a Adicionar Promoção
+							li
+								a Promoções em Andamento
+							li
+								a Aceitação
+					li
+						a Visibilidade
+					li
+						a Filiais
+				p.menu-label
+					| Transações
+				ul.menu-list
+					li
+						a Pagamentos
+					li
+						a Balanço
+		.column.is-main-content(style="width:100%")
 
+			nav.level
+				.level-item.has-text-centered
+					div
+						p.heading Usuários Online
+						p.title 231
+				.level-item.has-text-centered
+					div
+						p.heading Faixa etária
+						p.title 15/28
+				.level-item.has-text-centered
+					div
+						p.heading Pessoas que favoritaram seu estabelicimento
+						p.title 456K 
+				.level-item.has-text-centered
+					div
+						p.heading Pessoas atingidas
+						p.title 12k
+			.columns
+				.column.is-three-fifths
+					div(style='position:flex; width:100%;')
+						#map_div(style='height: 350px; width: 99%')
+				.column
+					div(style='position:flex; width:99%;')
+						article.message.is-primary
+							.message-header
+								p Clientes por perto
+							.message-body
+								| Existem clientes ao seu redor procurando por "Vídeo Game PS4", levando em consideração a procura nos últimos meses pela categoria "Vídeo Game", que tal 
+								strong fazer uma promoção ?
+								
+						.notification.is-danger
+							button.delete
+							|   Existem produtos que estão perdendo visibilidade por causa de seu  
+							strong preço 
+							| que tal revisá-los?
+						.notification.is-danger
+							button.delete
+							|   Alguma outra notificação importante.
 
-	nav.level
-		.level-item.has-text-centered
-			div
-				p.heading Usuários Online
-				p.title 231
-		.level-item.has-text-centered
-			div
-				p.heading Faixa etária
-				p.title 15/28
-		.level-item.has-text-centered
-			div
-				p.heading Pessoas que favoritaram seu estabelicimento
-				p.title 456K 
-		.level-item.has-text-centered
-			div
-				p.heading Pessoas atingidas
-				p.title 12k
-	.columns
-		.column.is-three-fifths
-			div(style='position:flex; width:100%;')
-				#map_div(style='height: 350px; width: 99%')
-		.column
-			div(style='position:flex; width:99%;')
-				article.message.is-primary
-					.message-header
-						p Clientes por perto
-					.message-body
-						| Existem clientes ao seu redor procurando por "Vídeo Game PS4", levando em consideração a procura nos últimos meses pela categoria "Vídeo Game", que tal 
-						strong fazer uma promoção ?
-						
-				.notification.is-danger
-					button.delete
-					|   Existem produtos que estão perdendo visibilidade por causa de seu  
-					strong preço 
-					| que tal revisá-los?
-				.notification.is-danger
-					button.delete
-					|   Alguma outra notificação importante.
-
-	.columns
-		.column.is-half
-			div(style='position:flex; width:100%;')
-				canvas#myChart
-		.column.is-half
-			div(style='position:flex; width:100%;')
-				canvas#myChart2
+			.columns
+				.column.is-half
+					div(style='position:flex; width:100%;')
+						canvas#myChart
+				.column.is-half
+					div(style='position:flex; width:100%;')
+						canvas#myChart2
 
 
 	script.
