@@ -4,7 +4,13 @@ module.exports = function(req,res,app){
 	var createUrl = url.parse(req.url).pathname == "/register";
 	var updateUrl = !createUrl;
 
-	req.assert('name', "Informe o seu nome").notEmpty();
+	req.assert('name', "Informe o seu Nome").notEmpty();
+
+	req.assert('idade', "Informe o sua idade").notEmpty();
+
+	req.assert('matricula', "Informe o sua Matrícula").notEmpty();
+
+	req.assert('patente', "Informe o sua Patente").notEmpty();
 
 
 	if(createUrl){

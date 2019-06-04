@@ -7,6 +7,10 @@ module.exports = function(){
 			type: String,
 			required: true,
 		},
+		patente:{
+			type: String,
+			required: true,
+		},
 		email: {
 			type: String,
 			trim: true,
@@ -23,6 +27,14 @@ module.exports = function(){
 		},
 		permission: {
 			type: String, default: "user"
+		},
+		idade:{
+			type: Number,
+			required: true
+		},
+		matricula:{
+			type: String,
+			required: true
 		}
 	});
 
@@ -33,5 +45,5 @@ module.exports = function(){
 	userSchema.methods.compareHash = function(password, old_password){
 		return bcrypt.compareSync(password, old_password, null);
 	}
-	return mongoose.model('dashboard', userSchema);
+	return mongoose.model('users', userSchema);
 }

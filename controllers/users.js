@@ -20,13 +20,15 @@ module.exports = function(app) {
 			if(validation(req,res)){
 				var model      = new user();
 				model.name     = req.body.name;
-				model.username = req.body.username;
+				model.patente  = req.body.patente;
+				model.idade    = req.body.idade;
+				model.matricula= req.body.matricula;
 				model.email    = req.body.email;
 				model.date 	   = Date.now();
 				model.password = model.generateHash(req.body.password);
-				user.findOne({'email': model.email},function(err,dados){
+				user.findOne({'matricula': model.matricula},function(err,dados){
 					if(dados){
-						req.flash('erro', 'Esse email já existe');
+						req.flash('erro', 'Essa matrícula já existe');
 						res.render('user/register', {dados:model});
 					} else {
 						model.save(function(err){
@@ -89,6 +91,9 @@ module.exports = function(app) {
 				var model = data;
 				model.name = req.body.name;
 				model.username = req.body.username;
+				model.email = req.body.email;
+				model.idade = req.body.idade;
+				model.patente = req.body.patente;
 				model.save(function(err){
 				if(err){
 					req.flash('erro', 'Error ao editar: '+err);

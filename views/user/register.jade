@@ -16,21 +16,42 @@ block content
 				label.label Name
 				.control
 					if dados
-						input.input(type='text',name="name", placeholder='John Smith', value="#{dados.name}", required)
+						input.input(type='text',name="name", placeholder='João Silva', value="#{dados.name}", required)
 					else
-						input.input(type='text',name="name", placeholder='John Smith', value="", autofocus, required)
+						input.input(type='text',name="name", placeholder='João Silva', value="", autofocus, required)
+			.field
+				label.label Patente
+				.control
+					if dados
+						input.input(type='text',name="patente", placeholder='Sargento', value="#{dados.patente}", required)
+					else
+						input.input(type='text',name="patente", placeholder='Sargento', value="", autofocus, required)
+			.field
+				label.label Idade
+				.control
+					if dados
+						input.input(type='number',name="idade", placeholder='25', value="#{dados.idade}", required)
+					else
+						input.input(type='number',name="idade", placeholder='25', value="", autofocus, required)
+			.field
+				label.label Matrícula
+				.control
+					if dados
+						input.input(type='number',name="matricula", placeholder='1234567', value="#{dados.matricula}", required)
+					else
+						input.input(type='number',name="matricula", placeholder='1234567', value="", autofocus, required)
 
 			.field
 				label.label Email
 				.control.has-icons-left.has-icons-right
 					if dados
-						input.input(type='email', name="email", placeholder='john@host',value="#{dados.email}", required)
+						input.input(type='email', name="email", placeholder='joao.silva@host',value="#{dados.email}", required)
 						span.icon.is-small.is-left
 							i.fas.fa-envelope
 						span.icon.is-small.is-right
 							i.fas.fa-exclamation-triangle
 					else
-						input.input(type='email', name="email", placeholder='john@host',value="",required)
+						input.input(type='email', name="email", placeholder='joao.silva@host',value="",required)
 						span.icon.is-small.is-left
 							i.fas.fa-envelope
 						span.icon.is-small.is-right

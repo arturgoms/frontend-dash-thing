@@ -8,233 +8,107 @@ block content
 					| General
 				ul.menu-list
 					li
-						a(href="/dashboard").is-active Dashboard
+						a(href="/dashboard").is-active Consultar Ocorrências
 					li
-						a(href="/user") Clientes
-				p.menu-label
-					| Administração
-				ul.menu-list
-					li
-						a Produtos
-					li
-						a Promoções
-						ul
-							li
-								a Adicionar Promoção
-							li
-								a Promoções em Andamento
-							li
-								a Aceitação
-					li
-						a Visibilidade
-					li
-						a Filiais
-				p.menu-label
-					| Transações
-				ul.menu-list
-					li
-						a Pagamentos
-					li
-						a Balanço
+						a(href="/ocorr/register") Registrar Ocorrências
+					if permission == "admin"
+						li
+							a(href="/user") Policiais Cadastrados
 		.column.is-main-content(style="width:100%")
+			h1(class="title is-1") Ocorrências
+			br
+			if messages.erro
+				.notification.is-danger
+					strong #{messages.erro}
+			if messages.info
+				.notification.is-success
+					strong #{messages.info}
+			if lista
+				if permission == "admin"
+					table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth
+						thead
+							tr
+								th
+									abbr(title='Tipo') Tipo
+								th
+									abbr(title='Data') Data
+								th
+									abbr(title='Local') Local
+								th
+									abbr(title='Reporter') Reporter
+								th
+									abbr(title='Vítimas') Vítimas
+								th
+									abbr(title='Aprovada?') Aprovada?
+								th
+									abbr(title='Ações') Ações
+						tbody
+							each valor in lista
+								tr
+									th #{valor.type}
+									th #{moment(valor.date).format('DD/MM/YYYY - HH:MM:ss')}
+									th #{valor.local}
+									th #{valor.reporter}
+									th #{valor.vitims}
+									th #{valor.approved}
+									th 
+										a.button.is-info(href='/ocorr/profile/#{valor._id}')
+											span.icon
+												i.far.fa-newspaper
+										span &nbsp;
 
-			nav.level
-				.level-item.has-text-centered
-					div
-						p.heading Usuários Online
-						p.title 231
-				.level-item.has-text-centered
-					div
-						p.heading Faixa etária
-						p.title 15/28
-				.level-item.has-text-centered
-					div
-						p.heading Pessoas que favoritaram seu estabelicimento
-						p.title 456K 
-				.level-item.has-text-centered
-					div
-						p.heading Pessoas atingidas
-						p.title 12k
-			.columns
-				.column.is-three-fifths
-					div(style='position:flex; width:100%;')
-						#map_div(style='height: 350px; width: 99%')
-				.column
-					div(style='position:flex; width:99%;')
-						article.message.is-primary
-							.message-header
-								p Clientes por perto
-							.message-body
-								| Existem clientes ao seu redor procurando por "Vídeo Game PS4", levando em consideração a procura nos últimos meses pela categoria "Vídeo Game", que tal 
-								strong fazer uma promoção ?
-								
-						.notification.is-danger
-							button.delete
-							|   Existem produtos que estão perdendo visibilidade por causa de seu  
-							strong preço 
-							| que tal revisá-los?
-						.notification.is-danger
-							button.delete
-							|   Alguma outra notificação importante.
+										if permission == "admin"
+											a.button.is-primary(href='/ocorr/edit/#{valor._id}')
+												span.icon
+													i.far.fa-bookmark
+										else
+											a.button.is-primary(href='/ocorr/edit/#{valor._id}', disabled)
+												span.icon
+													i.far.fa-bookmark
+										span &nbsp;
+										if permission == "admin"
+											form(method="POST", action="/ocorr/delete/#{valor._id}", role="form", style="display: inline-block", id="excluir-btn")
+												button.button.is-danger(type="submit" ) Deletar
+										else
+											form(method="POST", action="/ocorr/delete/#{valor._id}", role="form", style="display: inline-block", id="excluir-btn")
+												button.button.is-danger(type="submit", disabled) Deletar
+										span &nbsp;
+										if permission == "admin"
+											form(method="POST", action="/ocorr/approve/#{valor._id}", role="form", style="display: inline-block", id="excluir-btn")
+												button.button.is-danger(type="submit" ) Aprovar
+										else
+											form(method="POST", action="/ocorr/approve/#{valor._id}", role="form", style="display: inline-block", id="excluir-btn")
+												button.button.is-danger(type="submit", disabled) Aprovar
+				else
+					table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth
+						thead
+							tr
+								th
+									abbr(title='Tipo') Tipo
+								th
+									abbr(title='Data') Data
+								th
+									abbr(title='Local') Local
+								th
+									abbr(title='Reporter') Reporter
+								th
+									abbr(title='Vítimas') Vítimas
+								th
+									abbr(title='Ações') Ações
+						tbody
+							each valor in lista
+								if valor.approved == true
+									tr
+										th #{valor.type}
+										th #{moment(valor.date).format('DD/MM/YYYY - HH:MM:ss')}
+										th #{valor.local}
+										th #{valor.reporter}
+										th #{valor.vitims}
+										th 
+											a.button.is-info(href='/ocorr/profile/#{valor._id}')
+												span.icon
+													i.far.fa-newspaper
+											span &nbsp;
 
-			.columns
-				.column.is-half
-					div(style='position:flex; width:100%;')
-						canvas#myChart
-				.column.is-half
-					div(style='position:flex; width:100%;')
-						canvas#myChart2
-
-
-	script.
-
-		google.charts.load('current',	{
-				'packages':	['map'],
-				'mapsApiKey':	'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
-		});
-		google.charts.setOnLoadCallback(drawMap);
-
-		function	drawMap	()	{
-				var	data	=	new	google.visualization.DataTable();
-				data.addColumn('string',	'Address');
-				data.addColumn('string',	'Location');
-
-				data.addRows([
-						['Alameda Ecológica Burle Marx, 2518 – Santo Inácio – Curitiba – PR',					'Cu'	]
-				]);
-
-				var	options	=	{
-						mapType:	'styledMap',
-						zoomLevel:	14,
-						showTooltip:	true,
-						showInfoWindow:	true,
-						useMapTypeControl:	true,
-						maps:	{
-								
-								styledMap:	{
-										name:	'Mapa da Região',	
-										styles:	[
-												{featureType:	'poi.attraction',
-													stylers:	[{color:	'#fc48b2'}]
-												},
-												{featureType:	'road.highway',
-													stylers:	[{hue:	'#0277bd'},	{saturation:	-50}]
-												},
-												{featureType:	'road.highway',
-													elementType:	'labels.icon',
-													stylers:	[{hue:	'#000'},	{saturation:	100},	{lightness:	50}]
-												},
-												{featureType:	'landscape',
-													stylers:	[{hue:	'#259b24'},	{saturation:	10},	{lightness:	-22}]
-												}
-						]}}
-				};
-
-				var	map	=	new	google.visualization.Map(document.getElementById('map_div'));
-
-				map.draw(data,	options);
-		}
-
-		var	chartData	=	{
-		labels:	["January",	"February",	"March",	"April",	"May",	"June",	"July"],
-		datasets:	[{
-						type:	'line',
-						label:	'Média',
-						borderColor:	'rgba(255,99,132,1)',
-						borderWidth:	2,
-						fill:	false,
-						data:	[
-										19,
-										15,
-										11,
-										40,
-										46,
-										26,
-										33
-						]
-		},	{
-						type:	'bar',
-						label:	'Antes(2017)',
-						backgroundColor:	'rgba(255, 159, 64, 1)',
-						data:	[
-										12,
-										14,
-										9,
-										34,
-										38,
-										23,
-										28
-						],
-						borderColor:	'white',
-						borderWidth:	2
-		},	{
-						type:	'bar',
-						label:	'Depois(2018)',
-						backgroundColor:	'rgba(255, 206, 86, 1)',
-						data:	[
-										26,
-										17,
-										13,
-										45,
-										54,
-										30,
-										39
-						]
-		}]
-
-		};
-		window.onload	=	function()	{
-				var	ctx	=	document.getElementById("myChart").getContext("2d");
-				window.myMixedChart	=	new	Chart(ctx,	{
-								type:	'bar',
-								data:	chartData,
-								options:	{
-												responsive:	true,
-												title:	{
-																display:	true,
-																text:	'Comparativo de antes e depois de usar o App em 2017/2018'
-												},
-												tooltips:	{
-																mode:	'index',
-																intersect:	true
-												}
-								}
-				});
-		};
-		var ctx = document.getElementById("myChart2");
-		var myChart2 = new Chart(ctx, {
-				type: 'bar',
-				data: {
-						labels:["January",	"February",	"March",	"April",	"May",	"June",	"July"],
-						datasets: [{
-								label: '% de Procura por "Vídeo Game" nos Últimos meses',
-								data: [23, 32, 14, 16, 4, 10, 32],
-								backgroundColor: [
-										'rgba(255, 99, 132, 1)',
-										'rgba(54, 162, 235, 1)',
-										'rgba(255, 206, 86, 1)',
-										'rgba(75, 192, 192, 1)',
-										'rgba(153, 102, 255, 1)',
-										'rgba(255, 159, 64, 1)'
-								],
-								borderColor: [
-										'rgba(255,99,132,1)',
-										'rgba(54, 162, 235, 1)',
-										'rgba(255, 206, 86, 1)',
-										'rgba(75, 192, 192, 1)',
-										'rgba(153, 102, 255, 1)',
-										'rgba(255, 159, 64, 1)'
-								],
-								borderWidth: 1
-						}]
-				},
-				options: {
-						scales: {
-								yAxes: [{
-										ticks: {
-												beginAtZero:true
-										}
-								}]
-						}
-				}
-		});
+			else
+				p Nenhum Dado encontrado	

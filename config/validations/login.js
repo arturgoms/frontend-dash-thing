@@ -1,5 +1,5 @@
 module.exports = function(req,res){
-	req.assert('email', 'Email inválido').isEmail();
+	req.assert('matricula', 'Matrícula inválida').notEmpty();
 	var validateErros = req.validationErrors() || [];
 	if(validateErros.length > 0){
 		validateErros.forEach(function(e){

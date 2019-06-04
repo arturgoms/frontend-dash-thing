@@ -8,34 +8,12 @@ block content
 					| General
 				ul.menu-list
 					li
-						a(href="/dashboard") Dashboard
+						a(href="/dashboard") Consultar Ocorrências
 					li
-						a(href="/user").is-active Clientes
-				p.menu-label
-					| Administração
-				ul.menu-list
+						a(href="/dashboard") Registrar Ocorrências
+
 					li
-						a Produtos
-					li
-						a Promoções
-						ul
-							li
-								a Adicionar Promoção
-							li
-								a Promoções em Andamento
-							li
-								a Aceitação
-					li
-						a Visibilidade
-					li
-						a Filiais
-				p.menu-label
-					| Transações
-				ul.menu-list
-					li
-						a Pagamentos
-					li
-						a Balanço
+						a(href="/user").is-active Policiais Cadastrados
 		.column.is-main-content(style="width:100%")
 			h1(class="title is-1") Usuários
 			br
@@ -50,21 +28,24 @@ block content
 					thead
 						tr
 							th
-								abbr(title='ID') ID
-							th
 								abbr(title='Nome') Nome
 							th
 								abbr(title='Email') Email
 							th
-								abbr(title='Email') Data
+								abbr(title='Matrícula') Matrícula
 							th
-								abbr(title='Email') Ações
+								abbr(title='Patente') Patente
+							th
+								abbr(title='Data') Data
+							th
+								abbr(title='Ações') Ações
 					tbody
 						each valor in lista
 							tr
-								th #{valor._id}
 								th #{valor.name}
 								th #{valor.email}
+								th #{valor.matricula}
+								th #{valor.patente}
 								th #{moment(valor.date).format('DD/MM/YYYY - HH:MM:ss')}
 								th 
 									a.button.is-info(href='/profile/#{valor._id}')
@@ -77,7 +58,7 @@ block content
 									span &nbsp;
 									if valor._id == logged_id
 										form(method="POST", action="/delete/#{valor._id}", role="form", style="display: inline-block", id="excluir-btn")
-											button.button.is-danger(type="submit", disabled) Delete
+											button.button.is-danger(type="submit" ) Delete
 									else
 										form(method="POST", action="/delete/#{valor._id}", role="form", style="display: inline-block", id="excluir-btn")
 											button.button.is-danger(type="submit") Delete

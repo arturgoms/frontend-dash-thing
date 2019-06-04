@@ -1,0 +1,47 @@
+extends ../layout_clean
+
+block content
+	.container(style="width:85%; max-width: 450px")
+		h1(class="title is-1") Register
+		p(class="subtitle is-5") Register your account
+		br
+		if messages.erro
+			.notification.is-danger
+				each msg in messages.erro
+					strong #{msg}
+					br
+			br
+		form(method="POST", action="/ocorr/register", role="form")
+			.field
+				label.label Tipo
+				.control
+					if dados
+						input.input(type='text',name="type", placeholder='Homicídio', value="#{model.type}", required)
+					else
+						input.input(type='text',name="type", placeholder='Homicídio', value="", autofocus, required)
+			.field
+				label.label Local
+				.control
+					if dados
+						input.input(type='text',name="local", placeholder='Curitiba/Centro', value="#{model.local}", required)
+					else
+						input.input(type='text',name="local", placeholder='Curitiba/Centro', value="", autofocus, required)
+			.field
+				label.label Policial que reportou a ocorrência
+				.control
+					if dados
+						input.input(type='text',name="reporter", placeholder='João', value="#{model.reporter}", required)
+					else
+						input.input(type='text',name="reporter", placeholder='João', value="", autofocus, required)
+			.field
+				label.label Vítimas
+				.control
+					if dados
+						input.input(type='text',name="vitims", placeholder='Maria', value="#{model.vitims}", required)
+					else
+						input.input(type='text',name="vitims", placeholder='Maria', value="", autofocus, required)
+
+			.field.is-grouped
+				.control
+					button.button.is-primary(type="submit") Criar
+
