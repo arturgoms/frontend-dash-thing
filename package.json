@@ -9,11 +9,11 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "bcrypt-nodejs": "0.0.3",
-    "body-parser": "~1.0.0",
+    "body-parser": "~1.20.1",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",
-    "express": "~4.0.0",
+    "express": "~4.18.2",
     "express-flash": "0.0.2",
     "express-load": "^1.1.16",
     "express-session": "latest",
